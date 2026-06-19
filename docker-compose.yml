@@ -10,7 +10,7 @@ services:
     volumes:
       - vmvchat-data:/data   # chat.db + backups persisten aquí entre reinicios
     ports:
-      - "8090:8080"          # acceso directo local; en producción usa el perfil tls
+      - "8095:8080"          # host 8095 -> contenedor 8080 (apunta aquí Nginx Proxy Manager)
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
