@@ -10,7 +10,7 @@ services:
     volumes:
       - vmvchat-data:/data   # chat.db + backups persisten aquí entre reinicios
     ports:
-      - "8080:8080"          # acceso directo local; en producción usa el perfil tls
+      - "8090:8080"          # acceso directo local; en producción usa el perfil tls
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
@@ -18,25 +18,3 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
-
-  # TLS automático (Let's Encrypt). Arráncalo con: docker compose --profile tls up -d
-  # ponytail: Caddy gestiona los certificados solo; necesita DOMAIN apuntando a este host.
-  caddy:
-    image: caddy:2-alpine
-    profiles: ["tls"]
-    depends_on: [app]
-    environment:
-      DOMAIN: ${DOMAIN}
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy-data:/data
-      - caddy-config:/config
-    restart: unless-stopped
-
-volumes:
-  vmvchat-data:
-  caddy-data:
-  caddy-config:
