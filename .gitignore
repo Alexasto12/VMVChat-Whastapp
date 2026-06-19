@@ -1,0 +1,28 @@
+# Secretos
+.env
+
+# Dependencias
+node_modules/
+
+# Build del frontend (se regenera en el build de Docker)
+backend/dist/
+
+# Datos locales y backups de SQLite
+*.db
+backend/chat.db
+data/
+backup-*.db
+
+# Binarios Go
+vmvchat
+*.exe
+
+# Caddy
+caddy-data/
+caddy-config/
+
+# SO / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

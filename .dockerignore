@@ -1,0 +1,5 @@
+**/node_modules
+backend/chat.db
+backend/dist
+.env
+.git
